@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <title>studio450 · iOS Lock</title>
+  <title>studio450 · Home</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
@@ -100,7 +100,12 @@
       height: 100%;
       border-radius: 32px;
       overflow: hidden;
-      background: radial-gradient(circle at 0% 0%, #252c64 0, #050716 45%, #050712 100%);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.08), transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(80, 210, 255, 0.16), transparent 55%),
+        radial-gradient(circle at 0% 100%, rgba(111, 255, 198, 0.12), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(255, 234, 160, 0.18), transparent 55%),
+        linear-gradient(150deg, #070b1c, #050615 52%, #151025 100%);
     }
 
     .phone-notch {
@@ -110,107 +115,37 @@
       transform: translateX(-50%);
       width: 120px;
       height: 20px;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.82);
       border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
       z-index: 20;
     }
 
-    .screen {
-      position: absolute;
-      inset: 0;
+    .phone-notch-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #5edfff 0, #0c1a2e 55%, #000 100%);
+      box-shadow: 0 0 6px rgba(94, 223, 255, 0.7);
     }
 
-    /* LOCKSCREEN */
-
-    .lock-screen {
-      padding: 70px 18px 24px 18px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      background:
-        radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.16), transparent 55%),
-        radial-gradient(circle at 100% 0%, rgba(0, 221, 255, 0.16), transparent 55%),
-        radial-gradient(circle at 0% 100%, rgba(0, 255, 153, 0.14), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(255, 230, 140, 0.16), transparent 55%),
-        linear-gradient(145deg, #050618, #04030e 50%, #0a0c23 100%);
-      cursor: pointer;
-      transition:
-        transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
-        opacity 0.6s ease-out;
-    }
-
-    .lock-top {
-      text-align: center;
-      margin-top: 30px;
-    }
-
-    .lock-date {
-      font-size: 14px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-sub);
-      margin-bottom: 4px;
-    }
-
-    .lock-time {
-      font-size: 64px;
-      font-weight: 200;
-      line-height: 1;
-      margin-bottom: 8px;
-      text-shadow:
-        0 0 16px rgba(0, 0, 0, 0.75),
-        0 0 32px rgba(22, 119, 255, 0.25);
-    }
-
-    .lock-sub {
-      font-size: 15px;
-      color: var(--text-sub);
-    }
-
-    .lock-bottom {
-      margin-bottom: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .home-indicator {
-      width: 120px;
-      height: 5px;
+    .phone-notch-line {
+      width: 40px;
+      height: 6px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.9);
-      opacity: 0.7;
+      background: linear-gradient(90deg, #303447, #10131f);
     }
 
-    .swipe-hint {
-      font-size: 12px;
-      color: var(--text-sub);
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    /* HOME SCREEN */
-
-    .home-screen {
+    .screen {
       position: absolute;
       inset: 0;
       padding: 60px 16px 24px 16px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      background:
-        radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.12), transparent 60%),
-        radial-gradient(circle at 100% 0%, rgba(80, 210, 255, 0.16), transparent 60%),
-        radial-gradient(circle at 0% 100%, rgba(111, 255, 198, 0.14), transparent 65%),
-        radial-gradient(circle at 100% 100%, rgba(255, 234, 160, 0.18), transparent 60%),
-        linear-gradient(150deg, #070b1c, #08081a 52%, #1a1025 100%);
-      filter: blur(8px);
-      transform: scale(1.04);
-      transition:
-        filter 0.7s cubic-bezier(0.19, 1, 0.22, 1),
-        transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
     }
 
     .home-status-row {
@@ -226,6 +161,14 @@
       display: flex;
       align-items: center;
       gap: 6px;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4fffb3;
+      box-shadow: 0 0 8px rgba(79, 255, 179, 0.9);
     }
 
     .home-status-right {
@@ -265,8 +208,8 @@
       flex: 1;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      grid-auto-rows: 86px;
-      gap: 14px;
+      grid-auto-rows: 90px;
+      gap: 16px;
       align-content: flex-start;
       padding-top: 6px;
     }
@@ -275,57 +218,158 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 6px;
       cursor: pointer;
+      user-select: none;
+    }
+
+    .app-icon {
+      width: 68px;
+      height: 68px;
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.55), transparent 52%),
+        linear-gradient(145deg, #1c153b, #2a4776, #54b3ff);
+      box-shadow:
+        0 10px 18px rgba(0, 0, 0, 0.7),
+        0 0 0 1px rgba(255, 255, 255, 0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out;
+    }
+
+    .app-icon::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.6),
+        transparent 40%,
+        transparent 60%,
+        rgba(0, 0, 0, 0.45)
+      );
+      opacity: 0.7;
+      mix-blend-mode: screen;
+      pointer-events: none;
     }
 
     .app-glyph {
-      font-size: 28px;
+      position: relative;
+      z-index: 1;
+      font-size: 26px;
     }
 
     .app-label {
-      margin-top: 6px;
-      font-size: 12px;
+      font-size: 11px;
       color: #f0f2ff;
+      text-align: center;
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+      line-height: 1.2;
+    }
+
+    .app-label span {
+      display: block;
+    }
+
+    .app:active .app-icon {
+      transform: scale(0.94);
+      box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.9),
+        0 0 0 1px rgba(255, 255, 255, 0.4);
+    }
+
+    /* App-spezifische Farben */
+
+    .app-shop .app-icon {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.55), transparent 52%),
+        linear-gradient(145deg, #2a123a, #6b1f7f, #ff6ad5);
+    }
+
+    .app-yt .app-icon {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.55), transparent 52%),
+        linear-gradient(145deg, #360b0b, #b02121, #ff5b5b);
+    }
+
+    .app-ig-studio .app-icon,
+    .app-ig-mark .app-icon {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.55), transparent 52%),
+        linear-gradient(145deg, #111331, #4b27a8, #ff6ad5);
+    }
+
+    .app-tiktok .app-icon {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.55), transparent 52%),
+        linear-gradient(145deg, #050814, #0a2832, #24f4ff);
+    }
+
+    .app-work .app-icon {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.55), transparent 52%),
+        linear-gradient(145deg, #041b3a, #115b92, #5edfff);
+    }
+
+    .app-mail .app-icon {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.55), transparent 52%),
+        linear-gradient(145deg, #07271f, #148461, #65ffbf);
     }
 
     .home-dock {
-      margin-top: 12px;
-      margin-bottom: 6px;
+      margin-top: 8px;
+      margin-bottom: 4px;
       padding: 10px 12px;
       border-radius: 24px;
-      background: rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.16);
       box-shadow:
         0 10px 24px rgba(0, 0, 0, 0.8),
         0 0 0 1px rgba(255, 255, 255, 0.35);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       display: flex;
       justify-content: space-around;
     }
 
     .dock-icon {
-      width: 50px;
-      height: 50px;
+      width: 52px;
+      height: 52px;
       border-radius: 18px;
-      background: linear-gradient(145deg, #121421, #30374f, #7fa2ff);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.6), transparent 52%),
+        linear-gradient(145deg, #121421, #30374f, #7fa2ff);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 22px;
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
     }
 
-    /* UNLOCKED STATE */
-
-    body.unlocked .lock-screen {
-      transform: translateY(-100%);
-      opacity: 0;
+    .dock-icon::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        150deg,
+        rgba(255, 255, 255, 0.7),
+        transparent 40%,
+        transparent 65%,
+        rgba(0, 0, 0, 0.35)
+      );
+      mix-blend-mode: screen;
+      opacity: 0.8;
       pointer-events: none;
     }
 
-    body.unlocked .home-screen {
-      filter: none;
-      transform: scale(1);
+    .dock-icon:active {
+      transform: scale(0.95);
     }
 
     @media (max-width: 430px) and (max-height: 820px) {
@@ -346,24 +390,15 @@
 
   <div class="phone-shell">
     <div class="phone-inner">
-
-      <!-- LOCK SCREEN -->
-      <div class="screen lock-screen" id="lock-screen" onclick="unlockPhone()">
-        <div class="lock-top">
-          <div class="lock-date" id="lock-date">Sonntag, 16. November</div>
-          <div class="lock-time" id="lock-time">23:02</div>
-          <div class="lock-sub">Tippen oder hochwischen</div>
-        </div>
-        <div class="lock-bottom">
-          <div class="swipe-hint">Swipe up to unlock</div>
-          <div class="home-indicator"></div>
-        </div>
+      <div class="phone-notch">
+        <div class="phone-notch-dot"></div>
+        <div class="phone-notch-line"></div>
       </div>
 
-      <!-- HOME SCREEN -->
-      <div class="screen home-screen">
+      <div class="screen">
         <div class="home-status-row">
           <div class="home-status-left">
+            <span class="status-dot"></span>
             <span>studio450</span>
           </div>
           <div class="home-status-right">
@@ -375,55 +410,100 @@
         </div>
 
         <div class="home-grid">
-          <div class="app" data-app="shop"><div class="app-glyph">🛍️</div><div class="app-label">Shop</div></div>
-          <div class="app" data-app="work"><div class="app-glyph">💼</div><div class="app-label">Work</div></div>
-          <div class="app" data-app="youtube"><div class="app-glyph">▶️</div><div class="app-label">YouTube</div></div>
-          <div class="app" data-app="tiktok"><div class="app-glyph">🎵</div><div class="app-label">TikTok</div></div>
-          <div class="app" data-app="instagram"><div class="app-glyph">📷</div><div class="app-label">Insta</div></div>
-          <div class="app" data-app="mail"><div class="app-glyph">📩</div><div class="app-label">Mail</div></div>
-          <div class="app" data-app="about"><div class="app-glyph">⭐</div><div class="app-label">About</div></div>
-          <div class="app" data-app="contact"><div class="app-glyph">✉️</div><div class="app-label">Contact</div></div>
+          <!-- SHOP -->
+          <div class="app app-shop" data-app="shop">
+            <div class="app-icon">
+              <span class="app-glyph">🛍️</span>
+            </div>
+            <div class="app-label">
+              <span>SHOP</span>
+            </div>
+          </div>
+
+          <!-- YouTube -->
+          <div class="app app-yt" data-app="youtube">
+            <div class="app-icon">
+              <span class="app-glyph">▶️</span>
+            </div>
+            <div class="app-label">
+              <span>YouTube</span>
+            </div>
+          </div>
+
+          <!-- Instagram Studio450 -->
+          <div class="app app-ig-studio" data-app="ig-studio">
+            <div class="app-icon">
+              <span class="app-glyph">📷</span>
+            </div>
+            <div class="app-label">
+              <span>Instagram</span>
+              <span>Studio450</span>
+            </div>
+          </div>
+
+          <!-- Instagram Mark450 -->
+          <div class="app app-ig-mark" data-app="ig-mark">
+            <div class="app-icon">
+              <span class="app-glyph">📷</span>
+            </div>
+            <div class="app-label">
+              <span>Instagram</span>
+              <span>Mark450</span>
+            </div>
+          </div>
+
+          <!-- TikTok -->
+          <div class="app app-tiktok" data-app="tiktok">
+            <div class="app-icon">
+              <span class="app-glyph">🎵</span>
+            </div>
+            <div class="app-label">
+              <span>TikTok</span>
+            </div>
+          </div>
+
+          <!-- Studio450 Work -->
+          <div class="app app-work" data-app="work">
+            <div class="app-icon">
+              <span class="app-glyph">💼</span>
+            </div>
+            <div class="app-label">
+              <span>Studio450</span>
+              <span>Work</span>
+            </div>
+          </div>
+
+          <!-- Email Contact -->
+          <div class="app app-mail" data-app="mail">
+            <div class="app-icon">
+              <span class="app-glyph">✉️</span>
+            </div>
+            <div class="app-label">
+              <span>Email</span>
+              <span>Contact</span>
+            </div>
+          </div>
         </div>
 
         <div class="home-dock">
-          <div class="dock-icon" data-app="phone">📞</div>
-          <div class="dock-icon" data-app="browser">🌐</div>
-          <div class="dock-icon" data-app="music">♫</div>
-          <div class="dock-icon" data-app="settings">⚙️</div>
+          <div class="dock-icon" data-app="mail">✉️</div>
+          <div class="dock-icon" data-app="shop">🛍️</div>
+          <div class="dock-icon" data-app="tiktok">🎵</div>
+          <div class="dock-icon" data-app="youtube">▶️</div>
         </div>
       </div>
-
     </div>
   </div>
 
   <script>
-    function unlockPhone() {
-      document.body.classList.add("unlocked");
-    }
-
     function updateTimeSafe() {
       const now = new Date();
       const timeStr = now.toLocaleTimeString("de-DE", {
         hour: "2-digit",
         minute: "2-digit",
       });
-      const dateStr = now.toLocaleDateString("de-DE", {
-        weekday: "long",
-        day: "2-digit",
-        month: "long",
-      });
-
-      const lockTime = document.getElementById("lock-time");
-      const lockDate = document.getElementById("lock-date");
       const statusTime = document.getElementById("status-time");
-
-      if (lockTime) lockTime.textContent = timeStr;
       if (statusTime) statusTime.textContent = timeStr;
-      if (lockDate) {
-        const formatted =
-          dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
-        lockDate.textContent = formatted;
-      }
     }
 
     updateTimeSafe();
@@ -434,29 +514,28 @@
         const id = app.getAttribute("data-app");
         switch (id) {
           case "shop":
-            window.open("https://dein-shop.de", "_blank");
-            break;
-          case "work":
-            window.open("https://dein-portfolio.de", "_blank");
+            window.open("https://dein-shop-link.de", "_blank"); // hier deinen Shop-Link eintragen
             break;
           case "youtube":
-            window.open("https://youtube.com", "_blank");
+            window.open("https://www.youtube.com/watch?v=ghb6eDopW8I&list=PLGog_MTdG5L3ac_Y-XU0kxhqkI6s20SzV", "_blank"); // oder dein Channel
+            break;
+          case "ig-studio":
+            window.open("https://www.instagram.com/studio_mark450", "_blank"); // ggf. anpassen
+            break;
+          case "ig-mark":
+            window.open("https://www.instagram.com/_mark450", "_blank");
             break;
           case "tiktok":
             window.open("https://www.tiktok.com/@mark450_", "_blank");
             break;
-          case "instagram":
-            window.open("https://www.instagram.com/_mark450", "_blank");
+          case "work":
+            window.open("https://studio450.github.io", "_blank"); // Portfolio / Work
             break;
           case "mail":
-          case "contact":
-            window.location.href = "mailto:mail@studio450.ai";
-            break;
-          case "about":
-            alert("studio450 · AI visuals, videos, web.");
+            window.location.href = "mailto:mark450ai@gmail.com";
             break;
           default:
-            alert("App kommt bald.");
+            alert("Kommt bald.");
         }
       });
     });
